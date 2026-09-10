@@ -27,10 +27,11 @@ ingredients_list = st.multiselect(
 if ingredients_list:
     ingredients_string = ''
 
-    # Build ingredient string and show nutrition data for each chosen fruit
+    # Build ingredient string and fetch specific fruit data from API
     for fruit_chosen in ingredients_list:
         ingredients_string += fruit_chosen + ' '
-        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+        st.subheader(fruit_chosen + ' Nutrition Information')
+        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/" + fruit_chosen)
         sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
 
     # Construct insert SQL statement
